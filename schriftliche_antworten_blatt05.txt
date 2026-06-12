@@ -1,0 +1,37 @@
+Aufgabe 2.1 – Äquivalenzklassen und Grenzwerte
+
+Für Shop#accept ergeben sich folgende Äquivalenzklassen:
+
+Gültige Klassen:
+
+normales Fahrrad, z.B. RACE, FIXIE oder SINGLE_SPEED
+Kunde hat noch keinen offenen Auftrag
+es gibt aktuell 0 bis 4 offene Aufträge
+
+Ungültige Klassen:
+
+Fahrradtyp ist EBIKE
+Fahrradtyp ist GRAVEL
+Kunde hat bereits einen offenen Auftrag
+es gibt bereits 5 offene Aufträge
+
+Der wichtigste Grenzwert liegt bei der Anzahl offener Aufträge:
+
+4 offene Aufträge: neuer Auftrag wird noch akzeptiert
+5 offene Aufträge: neuer Auftrag wird abgelehnt
+
+Konkrete Testfälle:
+
+normales Fahrrad, keine offenen Aufträge → true
+normales Fahrrad, vier offene Aufträge → true
+normales Fahrrad, fünf offene Aufträge → false
+E-Bike → false
+Gravel-Bike → false
+gleicher Kunde hat bereits offenen Auftrag → false
+
+
+Aufgabe 2.2 – Mockito-Begründung
+
+Mockito wird verwendet, weil die Klasse Order unvollständig implementiert ist. Die Methoden getBicycleType() und getCustomer() werfen sonst eine UnsupportedOperationException. Deshalb werden Order-Objekte gemockt, sodass gezielt Rückgabewerte wie Type.RACE, Type.EBIKE oder ein Kundenname simuliert werden können.
+
+Die Methode Shop#accept selbst wird nicht gemockt. Sie wird tatsächlich ausgeführt und getestet. Mockito wird nur für die abhängigen Order-Objekte verwendet, damit die Tests ausführbar sind und sich auf das Verhalten von Shop#accept konzentrieren.
